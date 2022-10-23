@@ -1,0 +1,129 @@
+#			
+#	This is the KAAN IFC parameter custom property file		
+#	KAAN		
+#	Standard fase: XX		
+#	Version: 1.0		
+#	Date: 03-12-2020		
+#			
+#	This file works with the Revit IFC exporter. 		
+#	With this file revit parameters can be directed/mapped to custom IFC properties and custom property sets.		
+#			
+#	For mapping 'Pset##common' properties, use the KAAN_ParameterMappingTable.txt		
+#			
+#	Format:		
+#	PropertySet:	<Pset Name>	I[nstance]/T[ype]
+#	<Property Name 1>	<Data type>	<[opt] Revit parameter name, if different from IFC>
+#	<Property Name 2>	<Data type>	<[opt] Revit parameter name, if different from IFC>
+#	...		
+#			
+#	Data types supported: Area, Boolean, ClassificationReference, ColorTemperature, Count, Currency, 		
+#	ElectricalCurrent, ElectricalEfficacy, ElectricalVoltage, Force, Frequency, Identifier, 		
+#	Illuminance, Integer, Label, Length, LinearVelocity, Logical, LuminousFlux, LuminousIntensity, 		
+#	NormalisedRatio, PlaneAngle, PositiveLength, PositivePlaneAngle, PositiveRatio, Power, 		
+#	Pressure, Ratio, Real, Text, ThermalTransmittance, ThermodynamicTemperature, Volume, 		
+#	VolumetricFlowRate		
+#
+#
+#PropertySet:	COBie_Specification	T	IfcElementType
+#	NominalLength	Real	COBie.Type.NominalLength
+#	NominalWidth	Real	COBie.Type.NominalWidth
+#	NominalHeight	Real	COBie.Type.NominalHeight
+#	Shape		Text	COBie.Type.Shape
+#	Size		Text	COBie.Type.Size
+#	Color		Text	COBie.Type.Color
+#	Finish		Text	COBie.Type.Finish
+#	Grade		Text	COBie.Type.Grade
+#	Material	Text	COBie.Type.Material
+#	Constituents	Text	COBie.Type.Constituents
+#	Features	Text	Cobie.Type.Features
+#	AccessibilityPerformance	Text	COBie.Type.AccessibilityPerformance
+#	CodePerformance	Text	COBie.Type.CodePerformance
+#	SustainabilityPerformance	Text	COBie.Type.SustainabilityPerformance
+#
+PropertySet:	KAAN_ILS Summary	I	IfcObject
+#
+#	No parameters should be added to this Property Set, for other custom parameters,
+#	create a new property set
+
+	Revit Category	Text	Category
+	Naamgeving Element | Type Name	Text	Type
+	Fase Gebouwd | Construction Phase	Text	Phase Created
+	Bouwlaag | Level	Text	Level
+	Bouwlaag | Level	Text	Base Level
+	Bouwlaag | Level	Text	Work Plane
+	Bouwlaag | Level	Text	Reference Level
+	Bouwlaag | Level	Text	Schedule Level
+	Bouwlaag | Level	Text	Base Constraint
+	IFC Entiteit | IFC Class	Text	IfcExportAs
+	IFC Entiteit | IFC Class	Text	IfcClassName
+	IFC Entiteit | IFC Class	Text	IfcElement
+	NL-SfB code	Text	Assembly Code
+	NL-SfB Omschrijving | NL-SfB Description	Text	Assembly Description
+	Dragend | Load Bearing	Boolean	LoadBearing
+	Dragend | Load Bearing	Boolean	Structural
+	Uitwendig | External	Text	IsExternal
+	Uitwendig | External	Text	Function
+	Brandveiligheid | Fire Rating	Text	FireRating
+	Brandveiligheid | Fire Rating	Text	Fire Rating	
+	Geluidisolatie | Acoustic Value	Text	AcousticRating
+	Thermische isolatie | Thermal Resistance	Text	K_ThermalResistance
+	Thermische isolatie  | Thermal Transmittance	Text	ThermalTransmittance
+#		
+Propertyset:	KAAN_Project information	I	IfcBuilding
+	Organization	Text	Organization Name
+	Project name	Text	Project Name
+	Project Number	Text	Project Number
+	KAAN_ProjectCode	Text	K_ProjectCode
+	Building name	Text	Building Name
+	Project status	Text	Project Status
+	SiteName	Text	SiteName
+#			
+Propertyset:	KAAN_IFC	I	IfcObject
+	FireRating	Text	FireRating
+	AcousticRating	Text	AcousticRating
+	ThermalTransmittance	Text	ThermalTransmittance
+	FireExit	Boolean	FireExit
+	SelfClosing	Boolean	SelfClosing
+	SmokeStop	Boolean	SmokeStop
+	Compartmentation	Boolean	Compartmentation
+	OccupancyNumberPeak	Integer	OccupancyNumberPeak
+	SprinklerProtection	Boolean	SprinklerProtection
+	FireProtectionClass	Text	FireProtectionClass
+	IsFireResistant	Boolean	IsFireResistant
+	HandicapAccessible	Boolean	HandicapAccessible
+	SecurityRating	Text	SecurityRating
+	FireResistanceRating	Text	FireResistanceRating
+	FireFightingLift	Boolean	FireFightingLift
+	PubliclyAccessible	Boolean	PubliclyAccessible
+	GrossAreaPlanned	Area	GrossAreaPlanned
+	NetAreaPlanned	Area	NetAreaPlanned
+	BuildableArea	Area	BuildableArea
+	IsExternal	Boolean	IsExternal
+	LoadBearing	Boolean	LoadBearing
+	IfcExportAs	Text	IfcExportAs
+	IfcExportType	Text	IfcExportType
+	OccupancyType	Text	Occupancy
+#				
+Propertyset:	KAAN_ElementInformation	I	IfcObject
+	Level	Text	K_ElementLevel
+	ClearWidht	Length	K_ClearWidth
+	ClearHeight	Length	K_ClearHeight
+	ClearDepth	Length	K_ClearDepth
+	Width	Length	K_Width
+	Height	Length	K_Height
+	Depth	Length	K_Depth
+	Diameter	Length	K_Diameter
+	Length	Length	K_Length
+	PanelDepth	Length	K_PanelDepth
+	PanelWidth	Length	K_PanelWidth
+	FrameThickness	Length	K_FrameThickness
+	FrameDepth	Length	K_FrameDepth
+	TransomOffset	Length	K_TransomOffset
+	TransomThickness	Length	K_TransomThickness
+	ThresholdThickness	Length	K_ThresholdThickness
+	ThresholdDepth	Length	K_ThresholdDepth
+	NL-sfB Classification	Text	Assembly Code
+	NL-sfB Description	Text	Assembly Description
+	TypeMark	Text	Type Mark
+#			
+#	end of the document		

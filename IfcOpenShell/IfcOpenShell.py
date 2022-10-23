@@ -5,10 +5,16 @@ import pandas as pd
 
 # Importing the IFC file
 
-file_path = "C:\Sptl.ifc"
+file_path = "C:\IfcOpenShell\Sptl.ifc"
 csv_export_path = file_path.split(".")[0] + ".csv"
 
 ifc_file = ifcopenshell.open(file_path)
+
+# Prints out all items in a row
+#products = ifc_file.by_type('IfcProduct')
+#for product in products:
+#    print(product.is_a())
+#    print(product)
 
 
 def get_objects_data_by_class(file, class_type):
@@ -70,8 +76,9 @@ def get_attribute_value(object_data, attribute):
 #   IfcSpace will get all rooms
 #   IfcBuilding will get Project information
 #   IfcSite 
+#   IfcProduct
 
-data, pset_attributes = get_objects_data_by_class(ifc_file, "IfcBuilding")
+data, pset_attributes = get_objects_data_by_class(ifc_file, "IfcProduct")
 
 attributes = ["ExpressId", "GlobalId", "Class","PredefinedType", "Name", "Level", "Type", "Material"] + pset_attributes
 
