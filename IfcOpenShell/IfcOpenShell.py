@@ -1,11 +1,12 @@
 import ifcopenshell
 import ifcopenshell.util.element as Element
+import ifcopenshell.util.placement
 import pandas as pd
 
 
 # Importing the IFC file
 
-file_path = "C:\IfcOpenShell\Sptl.ifc"
+file_path = "C:\IfcOpenShell\TestHouse.ifc"
 csv_export_path = file_path.split(".")[0] + ".csv"
 
 ifc_file = ifcopenshell.open(file_path)
@@ -33,6 +34,11 @@ def get_objects_data_by_class(file, class_type):
         add_pset_attributes(psets)
         qtos =  Element.get_psets(obj, qtos_only=True)
         add_pset_attributes(qtos)
+        matrix = ifcopenshell.util.placement.get_local_placement(obj.ObjectPlacement)
+        global_coordinates = matrix[:,3][:3]
+        x_coordinate = matrix[:,3][0]
+        y_coordinate = matrix[:,3][1]
+        z_coordinate = matrix[:,3][2]
 
         object_id = obj.id()
         objects_data.append({
@@ -42,10 +48,13 @@ def get_objects_data_by_class(file, class_type):
             "PredefinedType" : Element.get_predefined_type(obj),
             "Name" : obj.Name,
             "Level" : Element.get_container(obj).Name if Element.get_container(obj) else "",
+            "x_coordinate": x_coordinate,
+            "y_coordinate": y_coordinate,
+            "z_coordinate": z_coordinate,
             "Type" :  Element.get_type(obj).Name if Element.get_type(obj) else "",
             "Material" : Element.get_material(obj).Name if Element.get_material(obj) else "",
             "QuantitySets" : qtos,
-            "PropertySets" : psets,
+            "PropertySets" : psets
         })
     return objects_data, list(pset_attributes)
 
@@ -78,9 +87,10 @@ def get_attribute_value(object_data, attribute):
 #   IfcSite 
 #   IfcProduct
 
-data, pset_attributes = get_objects_data_by_class(ifc_file, "IfcProduct")
+data, pset_attributes = get_objects_data_by_class(ifc_file, "IfcBuildingElement")
 
-attributes = ["ExpressId", "GlobalId", "Class","PredefinedType", "Name", "Level", "Type", "Material"] + pset_attributes
+
+attributes = ["ExpressId", "GlobalId", "Class","PredefinedType", "Name", "Level", "x_coordinate", "y_coordinate", "z_coordinate", "Type", "Material"] + pset_attributes
 
 pandas_data = []
 for object_data in data:
